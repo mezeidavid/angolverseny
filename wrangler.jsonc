@@ -1,0 +1,16 @@
+{
+  "name": "angolverseny",
+  "main": "src/index.js",
+  "compatibility_date": "2025-09-01",
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "run_worker_first": ["/api/*"]
+  },
+  "vars": {
+    // Clerk Dashboard -> API Keys -> Publishable key (ez nyilvános, nem titok)
+    "CLERK_PUBLISHABLE_KEY": "pk_test_aW5jbHVkZWQtbGVvcGFyZC03NDI5LmNsZXJrLmFjY291bnRzLmRldiQ"
+    // Opcionális: csak ezek a Clerk user ID-k (vesszővel elválasztva) használhatják az appot
+    // "ALLOWED_USER_IDS": "user_abc,user_def"
+  }
+}

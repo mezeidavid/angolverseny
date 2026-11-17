@@ -1,0 +1,1687 @@
+:root {
+    --bg: #f6f7f9;
+    --surface: #ffffff;
+    --surface-2: #f1f3f6;
+    --border: #e1e5ea;
+    --text: #14171f;
+    --muted: #667085;
+    --accent: #2f5bea;
+    --accent-hover: #2449c9;
+    --accent-soft: #eaf0ff;
+    --ok: #137a4b;
+    --ok-soft: #e7f5ee;
+    --danger: #b42318;
+    --danger-soft: #fdecea;
+    --warn: #b54708;
+    --warn-soft: #fff3e0;
+    --radius: 10px;
+    --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #0f1115;
+        --surface: #171a21;
+        --surface-2: #1e222b;
+        --border: #2a2f3a;
+        --text: #e8eaee;
+        --muted: #98a2b3;
+        --accent: #6b8cff;
+        --accent-hover: #859fff;
+        --accent-soft: #1d2748;
+        --ok: #4cc38a;
+        --ok-soft: #12281f;
+        --danger: #f97066;
+        --danger-soft: #34191a;
+        --warn: #f5a524;
+        --warn-soft: #33260f;
+    }
+}
+
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+body {
+    font-family: var(--font);
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--text);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+}
+
+button, input, textarea {
+    font: inherit;
+    color: inherit;
+}
+
+:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+/* ---------- Fejléc és elrendezés ---------- */
+
+.topbar {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+}
+
+.topbar-inner,
+.page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding-left: 24px;
+    padding-right: 24px;
+}
+
+.topbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+}
+
+.brand {
+    font-size: 17px;
+    font-weight: 650;
+    letter-spacing: -0.01em;
+}
+
+.page {
+    padding-top: 24px;
+    padding-bottom: 64px;
+}
+
+.section-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.hint {
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 12px;
+}
+
+/* ---------- Fülek ---------- */
+
+.tabs {
+    display: flex;
+    gap: 4px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 24px;
+    overflow-x: auto;
+}
+
+.tab {
+    padding: 10px 16px;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    color: var(--muted);
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.tab:hover {
+    color: var(--text);
+}
+
+.tab.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* ---------- Közös elemek ---------- */
+
+.panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.field {
+    width: 100%;
+    padding: 9px 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.field:hover {
+    border-color: var(--muted);
+}
+
+.field:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.btn {
+    padding: 9px 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.btn:hover {
+    background: var(--surface-2);
+    border-color: var(--muted);
+}
+
+.btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: var(--accent-hover);
+    border-color: var(--accent-hover);
+}
+
+input[type="file"] {
+    width: 100%;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+input[type="file"]::file-selector-button {
+    margin-right: 12px;
+    padding: 8px 14px;
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font: inherit;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+input[type="file"]::file-selector-button:hover {
+    background: var(--surface-2);
+}
+
+.empty-state {
+    text-align: center;
+    padding: 48px 20px;
+    color: var(--muted);
+    border: 1px dashed var(--border);
+    border-radius: var(--radius);
+}
+
+/* ---------- Jelenléti ív ---------- */
+
+.toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+
+.summary {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.chip {
+    padding: 3px 10px;
+    font-size: 13px;
+    border-radius: 999px;
+    background: var(--surface-2);
+    color: var(--muted);
+}
+
+.chip strong {
+    color: var(--text);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+}
+
+.chip.ok {
+    background: var(--ok-soft);
+    color: var(--ok);
+}
+
+.chip.ok strong {
+    color: inherit;
+}
+
+.chip.bad {
+    background: var(--danger-soft);
+    color: var(--danger);
+}
+
+.chip.bad strong {
+    color: inherit;
+}
+
+#teamsList {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 16px;
+}
+
+#teamsList .empty-state {
+    grid-column: 1 / -1;
+}
+
+.team-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    transition: border-color 0.15s, background 0.15s;
+}
+
+.team-card.present {
+    border-color: var(--ok);
+    background: var(--ok-soft);
+}
+
+.team-card.absent {
+    border-color: var(--danger);
+    background: var(--danger-soft);
+}
+
+.team-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.team-index {
+    flex: none;
+    min-width: 28px;
+    height: 28px;
+    padding: 0 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    background: var(--surface-2);
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+}
+
+.team-title {
+    flex: 1;
+    min-width: 0;
+}
+
+.team-name {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.3;
+    overflow-wrap: anywhere;
+}
+
+.team-school {
+    color: var(--muted);
+    font-size: 13px;
+    overflow-wrap: anywhere;
+}
+
+.seg {
+    flex: none;
+    display: inline-flex;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--surface);
+}
+
+.seg-btn {
+    padding: 5px 12px;
+    background: none;
+    border: none;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    cursor: pointer;
+}
+
+.seg-btn + .seg-btn {
+    border-left: 1px solid var(--border);
+}
+
+.seg-btn:hover {
+    background: var(--surface-2);
+}
+
+.seg-btn.on-present {
+    background: var(--ok);
+    color: #fff;
+}
+
+.seg-btn.on-absent {
+    background: var(--danger);
+    color: #fff;
+}
+
+.members {
+    display: grid;
+    gap: 10px;
+}
+
+.member-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--muted);
+    margin-bottom: 3px;
+}
+
+.member-note {
+    display: inline-block;
+    margin-top: 4px;
+    padding: 1px 8px;
+    font-size: 12px;
+    border-radius: 6px;
+    background: var(--warn-soft);
+    color: var(--warn);
+}
+
+/* ---------- Feladatok és táblázatok ---------- */
+
+.add-task {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.add-task .field {
+    flex: 1;
+    min-width: 200px;
+}
+
+.add-task .task-max {
+    flex: none;
+    width: 140px;
+    min-width: 0;
+}
+
+.table-wrap {
+    overflow-x: auto;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+th {
+    background: var(--surface-2);
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+}
+
+th small {
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+}
+
+tbody tr:hover {
+    background: var(--surface-2);
+}
+
+.num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+
+.score-input {
+    width: 76px;
+    padding: 6px 8px;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+
+.total-score {
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+}
+
+.rank {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--surface-2);
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+}
+
+.rank-1 {
+    background: var(--accent);
+    color: #fff;
+}
+
+.rank-2,
+.rank-3 {
+    background: var(--accent-soft);
+    color: var(--accent);
+}
+
+/* ---------- Bejelentkezés ---------- */
+
+.auth-view {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+.auth-card {
+    text-align: center;
+}
+
+.auth-card .brand {
+    font-size: 22px;
+    margin-bottom: 24px;
+}
+
+.auth-card #signIn {
+    display: flex;
+    justify-content: center;
+}
+
+.auth-msg {
+    color: var(--muted);
+}
+
+/* ---------- Felugró ablak ---------- */
+
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 12, 16, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 100;
+}
+
+.modal {
+    width: 100%;
+    max-width: 600px;
+    padding: 24px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+}
+
+.modal .section-title {
+    margin-bottom: 14px;
+}
+
+.modal textarea {
+    resize: vertical;
+    line-height: 1.6;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 16px;
+}
+
+@media (max-width: 640px) {
+    .topbar-inner,
+    .page {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    #teamsList {
+        grid-template-columns: 1fr;
+    }
+
+    .team-head {
+        flex-wrap: wrap;
+    }
+}
+
+
+/* ---------- Általános finomítások ---------- */
+
+.topbar {
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
+}
+
+.tabs {
+    display: inline-flex;
+    gap: 4px;
+    padding: 4px;
+    margin-bottom: 24px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow-x: auto;
+    max-width: 100%;
+}
+
+.tab {
+    padding: 8px 20px;
+    margin: 0;
+    border: none;
+    border-radius: 8px;
+    color: var(--muted);
+}
+
+.tab:hover {
+    color: var(--text);
+}
+
+.tab.active {
+    background: var(--surface);
+    color: var(--text);
+    box-shadow: 0 1px 3px rgba(16, 24, 40, 0.12);
+}
+
+.panel,
+.table-wrap,
+.team-card {
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
+}
+
+.panel {
+    border-radius: 12px;
+}
+
+.table-wrap {
+    border-radius: 12px;
+}
+
+.btn {
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
+}
+
+.empty-action {
+    margin-top: 14px;
+}
+
+/* ---------- Pontozás ---------- */
+
+.score-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+
+.score-head .hint {
+    margin-bottom: 0;
+}
+
+.score-tools {
+    display: flex;
+    gap: 10px;
+}
+
+.score-tools .field {
+    width: 220px;
+}
+
+.task-form {
+    padding: 16px;
+}
+
+.task-max-input {
+    flex: none;
+    width: 140px;
+    min-width: 0;
+}
+
+.table-wrap.scoring {
+    max-height: calc(100vh - 250px);
+    min-height: 220px;
+    overflow: auto;
+}
+
+.score-table {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.score-table th,
+.score-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+    vertical-align: middle;
+}
+
+.score-table thead th {
+    position: sticky;
+    top: 0;
+    z-index: 3;
+    background: var(--surface-2);
+    text-transform: none;
+    letter-spacing: 0;
+    white-space: normal;
+    vertical-align: bottom;
+}
+
+.score-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.score-table tbody tr:hover td {
+    background: var(--surface-2);
+}
+
+.score-table .sticky-col {
+    position: sticky;
+    left: 0;
+    z-index: 2;
+    min-width: 220px;
+    max-width: 280px;
+    border-right: 1px solid var(--border);
+}
+
+.score-table thead .sticky-col {
+    z-index: 4;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+}
+
+.score-table .task-col {
+    min-width: 120px;
+    text-align: center;
+    border-left: 1px solid var(--border);
+}
+
+.score-table thead .task-col {
+    text-align: center;
+}
+
+.score-table .total-col {
+    position: sticky;
+    right: 0;
+    z-index: 2;
+    min-width: 150px;
+    border-left: 1px solid var(--border);
+}
+
+.score-table thead .total-col {
+    z-index: 4;
+    text-align: right;
+}
+
+.task-name {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.3;
+}
+
+.task-meta {
+    display: block;
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--muted);
+    line-height: 1.4;
+}
+
+.task-meta.complete {
+    color: var(--ok);
+}
+
+.row-index {
+    display: inline-block;
+    min-width: 22px;
+    margin-right: 8px;
+    color: var(--muted);
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+}
+
+.row-name {
+    font-weight: 600;
+}
+
+.is-absent .row-name {
+    color: var(--muted);
+    font-weight: 500;
+}
+
+.badge-absent {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 0 8px;
+    font-size: 11px;
+    border-radius: 999px;
+    background: var(--danger-soft);
+    color: var(--danger);
+}
+
+.score-table .score-input {
+    width: 84px;
+    padding: 8px 6px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    border-style: dashed;
+    border-color: var(--border);
+    appearance: textfield;
+    -moz-appearance: textfield;
+}
+
+.score-table .score-input::-webkit-outer-spin-button,
+.score-table .score-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.score-table .score-input::placeholder {
+    color: var(--muted);
+    font-weight: 400;
+}
+
+.score-table .score-input.filled {
+    border-style: solid;
+    border-color: var(--border);
+    background: var(--surface-2);
+}
+
+.score-table .score-input:focus {
+    border-style: solid;
+    border-color: var(--accent);
+    background: var(--surface);
+}
+
+.score-table .score-input.invalid {
+    border-style: solid;
+    border-color: var(--danger);
+    background: var(--danger-soft);
+}
+
+.score-table .score-input.saved {
+    animation: saved 1.2s ease-out;
+}
+
+@keyframes saved {
+    0%   { border-color: var(--ok); box-shadow: 0 0 0 3px var(--ok-soft); }
+    100% { box-shadow: 0 0 0 0 transparent; }
+}
+
+.total-cell {
+    display: flex;
+    align-items: baseline;
+    justify-content: flex-end;
+    gap: 6px;
+    font-variant-numeric: tabular-nums;
+}
+
+.total-num {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.total-of {
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.bar {
+    height: 6px;
+    margin-top: 6px;
+    border-radius: 999px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    overflow: hidden;
+}
+
+.score-table tbody tr:hover .bar {
+    background: var(--surface);
+}
+
+.bar > span {
+    display: block;
+    height: 100%;
+    background: var(--accent);
+    border-radius: 999px;
+    transition: width 0.25s ease;
+}
+
+.toolbar-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.toolbar-actions .field {
+    width: 280px;
+}
+
+@media (max-width: 640px) {
+    .toolbar-actions {
+        width: 100%;
+    }
+
+    .toolbar-actions .field {
+        flex: 1;
+        width: auto;
+        min-width: 0;
+    }
+}
+
+.topbar-user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* ---------- Értesítés ---------- */
+
+.toast {
+    position: fixed;
+    left: 50%;
+    bottom: 24px;
+    transform: translateX(-50%);
+    max-width: calc(100vw - 32px);
+    padding: 10px 18px;
+    border-radius: 10px;
+    background: var(--text);
+    color: var(--surface);
+    font-size: 14px;
+    box-shadow: 0 6px 20px rgba(16, 24, 40, 0.25);
+    z-index: 200;
+}
+
+.toast.error {
+    background: var(--danger);
+    color: #fff;
+}
+
+@media (max-width: 640px) {
+    .score-tools {
+        width: 100%;
+    }
+
+    .score-tools .field {
+        flex: 1;
+        width: auto;
+    }
+
+    .score-table .sticky-col {
+        min-width: 150px;
+    }
+
+    .table-wrap.scoring {
+        max-height: calc(100vh - 300px);
+    }
+}
+
+/* ---------- Nyomtatás: fekete-fehér A4 végeredmény ---------- */
+
+#printSheet {
+    display: none;
+}
+
+@page {
+    size: A4;
+    margin: 16mm 15mm 18mm;
+
+    @bottom-left {
+        content: "Angol verseny \2013  végleges helyezések";
+        font: 8pt "Helvetica Neue", Arial, sans-serif;
+        color: #000;
+    }
+
+    @bottom-right {
+        content: counter(page) " / " counter(pages);
+        font: 8pt "Helvetica Neue", Arial, sans-serif;
+        color: #000;
+    }
+}
+
+@media print {
+    html, body {
+        background: #fff !important;
+        color: #000 !important;
+        font-size: 11pt;
+    }
+
+    #appView,
+    #authView,
+    .modal-backdrop,
+    .toast {
+        display: none !important;
+    }
+
+    #printSheet {
+        display: block;
+        font-family: "Helvetica Neue", Arial, "Segoe UI", sans-serif;
+        color: #000;
+        line-height: 1.35;
+    }
+
+    /* Fejléc */
+    #printSheet .p-header {
+        margin-bottom: 14pt;
+        padding-top: 10pt;
+        border-top: 3pt solid #000;
+    }
+
+    #printSheet .p-kicker {
+        font-size: 9.5pt;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+    }
+
+    #printSheet h1 {
+        margin: 2pt 0 8pt;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 30pt;
+        font-weight: 700;
+        line-height: 1.1;
+        letter-spacing: -0.01em;
+    }
+
+    #printSheet .p-meta {
+        display: block;
+        padding-top: 7pt;
+        border-top: 0.75pt solid #000;
+        font-size: 9.5pt;
+    }
+
+    #printSheet .p-meta span + span::before {
+        content: "\2022";
+        margin: 0 8pt;
+    }
+
+    /* Dobogó */
+    #printSheet .p-podium {
+        width: 100%;
+        margin: 0 0 12pt;
+        border-collapse: separate;
+        border-spacing: 8pt 0;
+        table-layout: fixed;
+    }
+
+    #printSheet .p-podium td {
+        padding: 0;
+        border: none;
+        vertical-align: top;
+    }
+
+    #printSheet .p-pod {
+        padding: 10pt 10pt 9pt;
+        border: 1pt solid #000;
+        text-align: left;
+        break-inside: avoid;
+    }
+
+    #printSheet .p-pod-1 {
+        border-width: 2.5pt;
+    }
+
+    #printSheet .p-pod-rank {
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 26pt;
+        font-weight: 700;
+        line-height: 1;
+        margin-bottom: 6pt;
+    }
+
+    #printSheet .p-pod-name {
+        font-size: 12pt;
+        font-weight: 700;
+        line-height: 1.25;
+        overflow-wrap: anywhere;
+    }
+
+    #printSheet .p-pod-school {
+        min-height: 2.6em;
+        margin-top: 1pt;
+        font-size: 8.5pt;
+        line-height: 1.3;
+    }
+
+    #printSheet .p-pod-score {
+        margin-top: 8pt;
+        padding-top: 6pt;
+        border-top: 0.5pt solid #000;
+        font-size: 9pt;
+    }
+
+    #printSheet .p-pod-score strong {
+        font-size: 18pt;
+        font-weight: 700;
+        margin-right: 2pt;
+    }
+
+    /* Teljes táblázat */
+    #printSheet .p-table {
+        width: 100%;
+        margin: 0;
+        border-collapse: collapse;
+    }
+
+    #printSheet .p-table th,
+    #printSheet .p-table td {
+        padding: 5.5pt 8pt;
+        text-align: left;
+        vertical-align: middle;
+        background: none !important;
+        color: #000 !important;
+        border: none;
+        border-bottom: 0.5pt solid #000;
+    }
+
+    #printSheet .p-table th {
+        padding-top: 4pt;
+        padding-bottom: 5pt;
+        font-size: 8pt;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        border-bottom: 1.5pt solid #000;
+    }
+
+    #printSheet .p-table thead {
+        display: table-header-group;
+    }
+
+    #printSheet .p-table tr {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+
+    #printSheet .p-table .p-rank {
+        width: 22mm;
+        text-align: center;
+    }
+
+    #printSheet .p-rank-num {
+        display: inline-block;
+        min-width: 22pt;
+        height: 22pt;
+        line-height: 21pt;
+        padding: 0 4pt;
+        border-radius: 12pt;
+        font-size: 11pt;
+        font-weight: 700;
+        text-align: center;
+        border: 1.5pt solid transparent;
+    }
+
+    #printSheet .p-rank-num.top {
+        border-color: #000;
+    }
+
+    #printSheet .p-team {
+        width: 34%;
+    }
+
+    #printSheet .p-team-name {
+        font-size: 11pt;
+        font-weight: 700;
+    }
+
+    #printSheet .p-team-school {
+        font-size: 8.5pt;
+    }
+
+    #printSheet .p-members {
+        font-size: 9.5pt;
+    }
+
+    #printSheet .p-table .p-score {
+        width: 20mm;
+        text-align: right;
+        font-size: 14pt;
+        font-weight: 700;
+        font-variant-numeric: tabular-nums;
+    }
+
+    #printSheet .p-table th.p-score {
+        font-size: 8pt;
+    }
+}
+
+
+
+
+
+/* CHATGPT */
+
+/* ==========================================
+   ANGOL VERSENY MENEDZSER – MODERN UI
+   ========================================== */
+
+:root {
+    --accent: #4f46e5;
+    --accent-hover: #4338ca;
+    --accent-soft: #eef2ff;
+    --radius: 14px;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --accent: #818cf8;
+        --accent-hover: #a5b4fc;
+        --accent-soft: #25264a;
+    }
+}
+
+/* Alapfelület */
+
+body {
+    background:
+        radial-gradient(ellipse at 50% 0%, rgba(79, 70, 229, 0.055), transparent 55%),
+        var(--bg);
+    letter-spacing: -0.01em;
+}
+
+::selection {
+    background: var(--accent-soft);
+    color: var(--text);
+}
+
+/* Fejléc */
+
+.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: color-mix(in srgb, var(--surface) 90%, transparent);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 2px 12px rgba(16, 24, 40, 0.035);
+}
+
+.topbar-inner {
+    height: 68px;
+}
+
+.brand {
+    font-size: 18px;
+    font-weight: 750;
+    letter-spacing: -0.045em;
+}
+
+/* Fülek */
+
+.tabs {
+    padding: 5px;
+    gap: 5px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+}
+
+.tab {
+    padding: 10px 20px;
+    border-radius: 9px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+.tab.active {
+    background: var(--surface);
+    color: var(--accent);
+    box-shadow: 0 2px 6px rgba(16, 24, 40, 0.09);
+}
+
+.tab:hover:not(.active) {
+    background: rgba(128, 128, 128, 0.07);
+}
+
+/* Panelek és kártyák */
+
+.panel,
+.team-card,
+.table-wrap {
+    border-radius: 16px;
+    box-shadow:
+        0 2px 5px rgba(16, 24, 40, 0.035),
+        0 8px 24px rgba(16, 24, 40, 0.025);
+}
+
+.panel {
+    padding: 24px;
+}
+
+.section-title {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.035em;
+}
+
+.hint {
+    line-height: 1.6;
+}
+
+/* Űrlapmezők */
+
+.field {
+    min-height: 42px;
+    border-radius: 10px;
+    padding: 10px 13px;
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+.field:hover {
+    border-color: var(--accent);
+}
+
+.field:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-soft);
+}
+
+.field::placeholder {
+    color: var(--muted);
+    opacity: 0.75;
+}
+
+/* Gombok */
+
+.btn {
+    min-height: 40px;
+    padding: 9px 17px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    transition:
+        transform 0.15s,
+        background 0.2s,
+        border-color 0.2s,
+        box-shadow 0.2s;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+    border-color: transparent;
+    box-shadow: 0 3px 9px rgba(79, 70, 229, 0.2);
+}
+
+.btn-primary:hover {
+    box-shadow: 0 5px 14px rgba(79, 70, 229, 0.27);
+}
+
+/* Összesítők */
+
+.chip {
+    padding: 6px 12px;
+    border: 1px solid var(--border);
+    font-weight: 500;
+}
+
+.chip strong {
+    font-weight: 750;
+}
+
+/* Csapatkártyák */
+
+#teamsList {
+    gap: 18px;
+}
+
+.team-card {
+    padding: 19px;
+    border-radius: 15px;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.team-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(16, 24, 40, 0.075);
+}
+
+.team-card.present {
+    border-color: var(--ok);
+    background: var(--ok-soft);
+}
+
+.team-card.absent {
+    border-color: var(--danger);
+    background: var(--danger-soft);
+}
+
+.team-index {
+    min-width: 32px;
+    height: 32px;
+    border-radius: 9px;
+    font-weight: 700;
+}
+
+.team-name {
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+}
+
+.team-school {
+    margin-top: 3px;
+}
+
+.member-label {
+    font-size: 12px;
+    font-weight: 650;
+    letter-spacing: 0.015em;
+}
+
+.members {
+    gap: 12px;
+}
+
+/* Jelenlét kapcsolók */
+
+.seg {
+    border-radius: 10px;
+    padding: 3px;
+    gap: 3px;
+}
+
+.seg-btn {
+    border-radius: 7px;
+    padding: 7px 12px;
+    transition: background 0.15s, color 0.15s;
+}
+
+.seg-btn + .seg-btn {
+    border-left: none;
+}
+
+.seg-btn.on-present,
+.seg-btn.on-absent {
+    border-radius: 7px;
+}
+
+/* Táblázatok */
+
+.table-wrap {
+    overflow: auto;
+}
+
+table {
+    border-spacing: 0;
+}
+
+th {
+    padding: 14px 16px;
+    font-size: 11px;
+    letter-spacing: 0.065em;
+}
+
+td {
+    padding: 13px 16px;
+}
+
+tbody tr {
+    transition: background 0.15s;
+}
+
+tbody tr:hover {
+    background: var(--accent-soft);
+}
+
+/* Pontozás */
+
+.score-table thead th {
+    padding: 16px 14px;
+}
+
+.score-table .sticky-col {
+    min-width: 230px;
+}
+
+.score-table .score-input {
+    border-radius: 9px;
+    border-style: solid;
+    font-size: 16px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.score-table .score-input:focus {
+    box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.score-table tbody tr:hover td {
+    background: var(--accent-soft);
+}
+
+.total-num {
+    color: var(--accent);
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.bar {
+    height: 7px;
+    border: none;
+}
+
+/* Helyezések */
+
+.rank {
+    width: 32px;
+    height: 32px;
+    font-weight: 750;
+}
+
+.rank-1 {
+    background: linear-gradient(135deg, #eab54b, #d69a24);
+    color: #fff;
+}
+
+.rank-2 {
+    background: #e5e7eb;
+    color: #475467;
+}
+
+.rank-3 {
+    background: #e7b28e;
+    color: #713f12;
+}
+
+/* Bejelentkezési képernyő */
+
+.auth-view {
+    background:
+        radial-gradient(ellipse at 50% 35%, rgba(79, 70, 229, 0.12), transparent 65%),
+        var(--bg);
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 460px;
+    padding: 38px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    box-shadow: 0 20px 60px rgba(16, 24, 40, 0.09);
+}
+
+.auth-card .brand {
+    font-size: 25px;
+    letter-spacing: -0.05em;
+    margin-bottom: 12px;
+}
+
+.auth-msg {
+    margin-bottom: 18px;
+}
+
+/* Felugró ablak */
+
+.modal-backdrop {
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.modal {
+    border-radius: 18px;
+    box-shadow: 0 20px 70px rgba(0, 0, 0, 0.2);
+    animation: modalIn 0.2s ease-out;
+}
+
+@keyframes modalIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Értesítések */
+
+.toast {
+    border-radius: 12px;
+    padding: 13px 20px;
+    font-weight: 600;
+    animation: toastIn 0.2s ease-out;
+}
+
+@keyframes toastIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, 8px);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}
+
+/* Reszponzivitás */
+
+@media (max-width: 640px) {
+    .topbar-inner {
+        height: 60px;
+    }
+
+    .brand {
+        font-size: 16px;
+    }
+
+    .page {
+        padding-top: 18px;
+    }
+
+    .panel {
+        padding: 17px;
+    }
+
+    .auth-card {
+        padding: 25px 18px;
+    }
+
+    .tabs {
+        display: flex;
+        width: 100%;
+    }
+
+    .tab {
+        flex: 1;
+        padding: 10px 8px;
+        font-size: 13px;
+    }
+
+    .team-card {
+        padding: 15px;
+    }
+
+    .team-head {
+        align-items: center;
+    }
+
+    .toolbar-actions {
+        gap: 8px;
+    }
+
+    .score-table .sticky-col {
+        min-width: 145px;
+    }
+}
+
+/* Akadálymentesség: mozgás csökkentése */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}

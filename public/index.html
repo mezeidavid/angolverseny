@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <title>Angol Verseny Menedzser</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Bejelentkezés (Clerk) -->
+    <main class="auth-view" id="authView">
+        <div class="auth-card">
+            <h1 class="brand">Angol Verseny Menedzser</h1>
+            <p class="auth-msg" id="authMsg">Betöltés…</p>
+            <div id="signIn"></div>
+        </div>
+    </main>
+
+    <!-- Alkalmazás -->
+    <div id="appView" hidden>
+        <header class="topbar">
+            <div class="topbar-inner">
+                <h1 class="brand">Angol Verseny Menedzser</h1>
+                <div class="topbar-user">
+                    <div id="userButton"></div>
+                </div>
+            </div>
+        </header>
+
+        <main class="page">
+            <nav class="tabs" role="tablist">
+                <button class="tab active" role="tab" onclick="switchTab(0)">Jelenléti ív</button>
+                <button class="tab" role="tab" onclick="switchTab(1)">Pontozás</button>
+                <button class="tab" role="tab" onclick="switchTab(2)">Helyezések</button>
+            </nav>
+
+            <!-- Tab 1: Jelenléti ív -->
+            <section class="tab-content active" id="tab-0">
+                <div class="panel">
+                    <h2 class="section-title">Csapatok importálása</h2>
+                    <p class="hint">Excel vagy CSV fájl, oszlopok: Csapatnév, Tag1, Tag2, Tag3, Iskola</p>
+                    <input type="file" id="fileInput" accept=".xlsx,.xls,.csv" onchange="handleFile(event)">
+                </div>
+
+                <div class="toolbar">
+                    <div class="summary" id="teamsSummary"></div>
+                    <div class="toolbar-actions">
+                        <input type="search" class="field" id="teamSearch" placeholder="Keresés csapatra, névre, iskolára" autocomplete="off" oninput="filterTeams()">
+                        <button class="btn" onclick="openSwapModal()">Cserék</button>
+                    </div>
+                </div>
+
+                <div id="teamsList"></div>
+                <div class="empty-state" id="teamsNoResult" hidden>Nincs a keresésnek megfelelő csapat.</div>
+            </section>
+
+            <!-- Tab 2: Pontozás -->
+            <section class="tab-content" id="tab-1">
+                <div class="score-head">
+                    <div>
+                        <h2 class="section-title">Pontozás</h2>
+                        <p class="hint">A pontok automatikusan mentődnek. Enter vagy nyíl le: következő csapat ugyanabban a feladatban.</p>
+                    </div>
+                    <div class="score-tools">
+                        <input type="search" class="field" id="scoreSearch" placeholder="Csapat keresése" oninput="filterScoringRows()">
+                        <button class="btn btn-primary" onclick="toggleTaskForm()">Új feladat</button>
+                    </div>
+                </div>
+
+                <div class="panel task-form" id="taskForm" hidden>
+                    <div class="add-task">
+                        <input type="text" class="field" id="taskName" placeholder="Feladat neve, pl. Listening">
+                        <input type="number" class="field task-max-input" id="taskMaxScore" placeholder="Max pont" min="1">
+                        <button class="btn btn-primary" onclick="addTask()">Hozzáadás</button>
+                        <button class="btn" onclick="toggleTaskForm()">Mégse</button>
+                    </div>
+                </div>
+
+                <div id="scoringTable"></div>
+            </section>
+
+            <!-- Tab 3: Helyezések -->
+            <section class="tab-content" id="tab-2">
+                <div class="toolbar">
+                    <h2 class="section-title">Végleges helyezések</h2>
+                    <button class="btn btn-primary" onclick="printRanking()">Nyomtatás / PDF</button>
+                </div>
+                <div id="rankingTable"></div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Csereszöveg ablak -->
+    <div class="modal-backdrop" id="swapModal" hidden onclick="if (event.target === this) closeSwapModal()">
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="swapTitle">
+            <h2 class="section-title" id="swapTitle">Cserék</h2>
+            <textarea id="swapText" class="field" rows="10"></textarea>
+            <div class="modal-actions">
+                <button class="btn" onclick="closeSwapModal()">Bezárás</button>
+                <button class="btn btn-primary" id="copyBtn" onclick="copySwapText()">Másolás</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast" role="status" hidden></div>
+
+    <!-- Nyomtatható végeredmény (csak nyomtatáskor látszik) -->
+    <div id="printSheet"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
