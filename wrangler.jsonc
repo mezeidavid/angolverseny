@@ -12,5 +12,8 @@
     "CLERK_PUBLISHABLE_KEY": "pk_test_aW5jbHVkZWQtbGVvcGFyZC03NDI5LmNsZXJrLmFjY291bnRzLmRldiQ"
     // Opcionális: csak ezek a Clerk user ID-k (vesszővel elválasztva) használhatják az appot
     // "ALLOWED_USER_IDS": "user_abc,user_def"
-  }
+  },
+  "routes": [
+  { "pattern": "angolverseny.mezeidavid.hu", "custom_domain": true }
+  ]
 }
