@@ -619,7 +619,7 @@ function getRankings() {
 }
 
 function buildPrintSheet() {
-    const sheet = $('printSheet');
+    const sheet = $('printBody');
     const date = new Date().toLocaleDateString('hu-HU', { year: 'numeric', month: 'long', day: 'numeric' });
     const rankings = getRankings();
 

@@ -5,13 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light dark">
     <title>PG English Competition - Manager</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+    <link rel="icon" type="image/png" sizes="64x64" href="favicon-64.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <!-- Bejelentkezés (Clerk) -->
     <main class="auth-view" id="authView">
         <div class="auth-card">
-            <h1 class="brand">PG English Competition</h1>
+            <div class="brand-lockup">
+                <picture>
+                    <source srcset="logo-dark.png" media="(prefers-color-scheme: dark)">
+                    <img class="brand-logo" src="logo.png" alt="" width="96" height="96">
+                </picture>
+                <h1 class="brand">PG English Competition</h1>
+            </div>
             <p class="auth-msg" id="authMsg">Betöltés…</p>
             <div id="signIn"></div>
         </div>
@@ -21,7 +30,13 @@
     <div id="appView" hidden>
         <header class="topbar">
             <div class="topbar-inner">
-                <h1 class="brand">PG English Competition</h1>
+                <div class="brand-lockup">
+                    <picture>
+                        <source srcset="logo-dark.png" media="(prefers-color-scheme: dark)">
+                        <img class="brand-logo" src="logo.png" alt="" width="96" height="96">
+                    </picture>
+                    <h1 class="brand">PG English Competition</h1>
+                </div>
                 <div class="topbar-user">
                     <div id="userButton"></div>
                 </div>
@@ -106,7 +121,10 @@
     <div class="toast" id="toast" role="status" hidden></div>
 
     <!-- Nyomtatható végeredmény (csak nyomtatáskor látszik) -->
-    <div id="printSheet"></div>
+    <div id="printSheet">
+        <img class="p-logo" src="logo-print.png" alt="">
+        <div id="printBody"></div>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script src="script.js"></script>
